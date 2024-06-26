@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 
 $shop_prefix = "shop";
 
+
+
 Route::middleware(['web'])
 ->name($shop_prefix)
 ->prefix($shop_prefix)->group(function () {
@@ -24,6 +26,20 @@ Route::middleware(['web'])
     Route::get('/thankyou', [
         \Jiny\Shop\Order\Http\Controllers\ThankyouController::class,
         "index"])->name('shop.thankyou');
+});
+
+// 인증 없이 접속 가능한 경로 처리
+Route::middleware(['web'])->group(function(){
+    Route::get('/admin/shop/address', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopAddressController::class,
+        "index"]);
+});
+
+// 인증 없이 접속 가능한 경로 처리
+Route::middleware(['web'])->group(function(){
+    Route::get('/admin/shop/user_phone', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminUserPhoneController::class,
+        "index"]);
 });
 
 /**
