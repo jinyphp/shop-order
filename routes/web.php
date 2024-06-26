@@ -40,6 +40,12 @@ Route::middleware(['web'])->group(function(){
         "index"]);
 });
 
+Route::middleware(['web'])->group(function(){
+    Route::get('/admin/shop/shipping', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopShippingsController::class,
+        "index"]);
+});
+
 /**
  * 관리자
  */
