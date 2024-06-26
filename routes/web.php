@@ -26,6 +26,20 @@ Route::middleware(['web'])
         "index"])->name('shop.thankyou');
 });
 
+//인증 없이 접속 가능한 경로 처리
+Route::middleware(['web'])->group(function(){
+    Route::get('/admin/shop/phone', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminUserPhoneController::class,
+        "index"]);
+});
+
+//인증 없이 접속 가능한 경로 처리
+Route::middleware(['web'])->group(function(){
+    Route::get('/admin/shop/shop_address', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopAddressController::class,
+        "index"]);
+});
+
 /**
  * 관리자
  */
