@@ -4,6 +4,12 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+
+/*
+주문 상태 테이블
+code: 주문 상태 코드
+name: 주문 상태 이름
+*/
 return new class extends Migration
 {
     /**

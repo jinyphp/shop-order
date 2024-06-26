@@ -6,6 +6,18 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/*
+유저 현금 관리 테이블
+user_id: 유저 id
+email: 유저 email
+currency: 통화
+balance: 잔고?
+
+bank_name: 은행명
+bank_user: 예금주
+bank_account: 계좌번호
+bank_swift: 은행 swift 코드
+*/
 return new class extends Migration
 {
     /**
