@@ -4,6 +4,13 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+
+/*
+유저 포인트 테이블
+user_id: 유저 id
+email: 유저 email
+balance: 유저 point 잔액
+*/
 return new class extends Migration
 {
     /**
