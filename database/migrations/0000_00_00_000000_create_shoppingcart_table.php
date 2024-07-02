@@ -12,10 +12,10 @@ class CreateShoppingcartTable extends Migration
     public function up()
     {
         Schema::create('shoppingcart', function (Blueprint $table) {
+            $table->timestamps();
             $table->string('identifier');
             $table->string('instance');
             $table->longText('content');
-            $table->nullableTimestamps();
 
             $table->primary(['identifier', 'instance']);
         });
@@ -25,6 +25,6 @@ class CreateShoppingcartTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('cart.database.table'));
+        Schema::dropIfExists('shoppingcart');
     }
 }

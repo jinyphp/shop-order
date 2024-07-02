@@ -37,8 +37,8 @@ return new class extends Migration
 
 
 
-            $table->foreign('product_id')->references('id')->on('shop_products')->onDelete('cascade');
-            $table->foreign('order_id')->references('id')->on('shop_orders')->onDelete('cascade');
+            // $table->foreign('product_id')->references('id')->on('shop_products')->onDelete('cascade');
+            // $table->foreign('order_id')->references('id')->on('shop_orders')->onDelete('cascade');
         });
     }
 
