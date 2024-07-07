@@ -8,6 +8,10 @@ Route::middleware(['web'])
 ->name($shop_prefix)
 ->prefix($shop_prefix)->group(function () {
 
+    Route::get('/orders', [
+        \Jiny\Shop\Order\Http\Controllers\OrderListController::class,
+        "index"]);
+
     // 장바구니, 관심상품
     Route::get('/cart', [
         \Jiny\Shop\Http\Controllers\CartController::class,
@@ -50,7 +54,7 @@ Route::middleware(['web'])->group(function(){
     Route::get('/admin/shop_cart', [
         \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopCartController::class,
         "index"]);
-    
+
 });
 
 
@@ -58,28 +62,28 @@ Route::middleware(['web'])->group(function(){
     Route::get('/admin/order_items', [
         \Jiny\Shop\Order\Http\Controllers\Admin\AdminOrderItemsController::class,
         "index"]);
-    
+
 });
 
 Route::middleware(['web'])->group(function(){
     Route::get('/admin/shop/payment', [
         \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopPaymentController::class,
         "index"]);
-    
+
 });
 
 Route::middleware(['web'])->group(function(){
     Route::get('/admin/user_point', [
         \Jiny\Shop\Order\Http\Controllers\Admin\AdminUserPointController::class,
         "index"]);
-    
+
 });
 
 Route::middleware(['web'])->group(function(){
     Route::get('/admin/user_point_history', [
         \Jiny\Shop\Order\Http\Controllers\Admin\AdminUserPointHistoryController::class,
         "index"]);
-    
+
 });
 
 Route::middleware(['web'])->group(function(){

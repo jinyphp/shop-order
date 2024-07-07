@@ -22,7 +22,7 @@ class JinyShopOrderServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/setting.php' => config_path('jiny/shop/order.php'),
         ]);
-        
+
 
 
     }
@@ -31,7 +31,8 @@ class JinyShopOrderServiceProvider extends ServiceProvider
     {
         /* 라이브와이어 컴포넌트 등록 */
         $this->app->afterResolving(BladeCompiler::class, function () {
-            
+            Livewire::component('ShopOrders', \Jiny\Shop\Order\Http\Livewire\ShopOrders::class);
+
 
         });
 
