@@ -8,6 +8,10 @@ Route::middleware(['web'])
 ->name($shop_prefix)
 ->prefix($shop_prefix)->group(function () {
 
+    Route::get('/transactions', [
+        \Jiny\Shop\Order\Http\Controllers\TransactionController::class,
+        "index"]);
+
     Route::get('/orders', [
         \Jiny\Shop\Order\Http\Controllers\OrderListController::class,
         "index"]);
