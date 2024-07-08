@@ -32,8 +32,10 @@ class JinyShopOrderServiceProvider extends ServiceProvider
         /* 라이브와이어 컴포넌트 등록 */
         $this->app->afterResolving(BladeCompiler::class, function () {
             Livewire::component('ShopOrders', \Jiny\Shop\Order\Http\Livewire\ShopOrders::class);
+        });
 
-
+        $this->app->afterResolving(BladeCompiler::class, function () {
+            Livewire::component('ShopWish', \Jiny\Shop\Order\Http\Livewire\ShopWish::class);
         });
 
 

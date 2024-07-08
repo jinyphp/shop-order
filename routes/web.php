@@ -18,7 +18,7 @@ Route::middleware(['web'])
         "index"])->name('shop.cart');
 
     Route::get('/wishlist', [
-        \jiny\Shop\Http\Controllers\WishController::class,
+        \Jiny\Shop\Order\Http\Controllers\WishController::class,
         "index"]);
 
     Route::get('/checkout', [
