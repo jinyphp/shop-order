@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+
+/**
+ * 라우트경로 : /admin/order/status
+ */
 use Jiny\WireTable\Http\Controllers\WireTablePopupForms;
 class AdminShopOrderStatusController extends WireTablePopupForms
 {
