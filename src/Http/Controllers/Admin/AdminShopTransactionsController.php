@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 /**
- * 라우트경로 : /admin/shop_transactions
+ * 라우트경로 : /admin/shop/transactions
  */
 use Jiny\WireTable\Http\Controllers\WireTablePopupForms;
 class AdminShopTransactionsController extends WireTablePopupForms

@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+
+/**
+ * 라우트경로 : /admin/shop/address
+ */
 use Jiny\WireTable\Http\Controllers\WireTablePopupForms;
 class AdminShopAddressController extends WireTablePopupForms
 {

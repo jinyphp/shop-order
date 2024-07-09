@@ -8,10 +8,6 @@ use Illuminate\Support\Facades\DB;
 class ShopTransactions extends Component
 {
     public $transactions;
-    public $selectedStatus;
-    public $selectedMode;
-    public $userId;
-    public $orderId;
 
     public function mount()
     {

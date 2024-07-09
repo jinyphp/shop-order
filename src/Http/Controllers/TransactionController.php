@@ -10,21 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
-    public $admin;
-
-    public function __construct()
-    {
-        $this->admin = true;
-    }
-
     /**
      * Display a listing of the resource.
      * @return Renderable
      */
     public function index(Request $request)
     {
-        return view('www::slot1.shop.transactionList', [
-            'admin' => $this->admin
-        ]);
+        return view('www::slot1.shop.transactionList');
     }
 }

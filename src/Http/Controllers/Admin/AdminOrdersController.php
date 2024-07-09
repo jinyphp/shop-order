@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 
 
 /**
- * 라우트경로 : /admin/shop_orders
+ * 라우트경로 : /admin/shop/orders
  */
 use Jiny\WireTable\Http\Controllers\WireTablePopupForms;
 class AdminOrdersController extends WireTablePopupForms

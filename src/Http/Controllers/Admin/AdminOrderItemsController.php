@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 /**
- * 라우트경로 : /admin/order_items
+ * 라우트경로 : /admin/order/items
  */
 use Jiny\WireTable\Http\Controllers\WireTablePopupForms;
 class AdminOrderItemsController extends WireTablePopupForms
