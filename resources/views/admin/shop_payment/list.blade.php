@@ -15,7 +15,9 @@
             {{-- 테이블 리스트 --}}
             <x-wire-tbody-item :selected="$selected" :item="$item">
                 <td width='50'>
-                    {{$item->id}}
+                    <x-click wire:click="edit({{$item->id}})">
+                        {{$item->id}}
+                    </x-click>
                 </td>
                 <td width='200'>{{$item->name}}</td>
                 <td width='100'>{{$item->test}}</td>

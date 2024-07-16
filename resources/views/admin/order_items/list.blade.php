@@ -12,8 +12,10 @@
             @foreach ($rows as $item)
             {{-- 테이블 리스트 --}}
             <x-wire-tbody-item :selected="$selected" :item="$item">
-                <td width='50'>
-                    {{$item->product_id}}
+                <td >
+                    <x-click wire:click="edit({{$item->id}})">
+                        {{$item->product_id}}
+                    </x-click>
                 </td>
                 <td width='100'>{{$item->order_id}}</td>
                 <td width='100'>{{$item->price}}</td>
