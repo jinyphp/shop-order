@@ -3,7 +3,7 @@
     <x-wire-thead>
         <th width='50'>id</th>
         <th width='200'>code</th>
-        <th width='200'>이름</th>
+        <th>이름</th>
         <th width='200'>수정일자</th>
     </x-wire-thead>
     <tbody>
@@ -15,7 +15,7 @@
                     {{$item->id}}
                 </td>
                 <td width='200'>{{$item->code}}</td>
-                <td width='200'>{{$item->name}}</td>
+                <td>{{$item->name}}</td>
                 <td width='200'>{{$item->updated_at}}</td>
 
             </x-wire-tbody-item>

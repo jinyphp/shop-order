@@ -4,7 +4,7 @@
         <th width='50'>cartidx</th>
         <th width='100'>email</th>
         <th width='100'>product_id</th>
-        <th width='200'>제품명</th>
+        <th>제품명</th>
         <th width='200'>이미지</th>
         <th width='200'>옵션</th>
         <th width='200'>가격</th>
@@ -24,7 +24,7 @@
                 </td>
                 <td width='100'>{{$item->email}}</td>
                 <td width='100'>{{$item->product_id}}</td>
-                <td width='200'>{{$item->product}}</td>
+                <td>{{$item->product}}</td>
                 <td width='200'>{{$item->image}}</td>
                 <td width='200'>{{$item->option}}</td>
                 <td width='200'>{{$item->price}}</td>

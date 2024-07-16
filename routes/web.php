@@ -8,6 +8,9 @@ Route::middleware(['web'])
 ->name($shop_prefix)
 ->prefix($shop_prefix)->group(function () {
 
+
+
+
     Route::get('/transactions', [
         \Jiny\Shop\Order\Http\Controllers\TransactionController::class,
         "index"]);
@@ -34,49 +37,80 @@ Route::middleware(['web'])
         "index"])->name('shop.thankyou');
 });
 
+
+
+
 //인증 없이 접속 가능한 경로 처리
 Route::middleware(['web'])->group(function(){
-    Route::get('/admin/shop/phone', [
-        \Jiny\Shop\Order\Http\Controllers\Admin\AdminUserPhoneController::class,
+    ## 관심상품
+    Route::get('/admin/shop/wish', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopWishController::class,
         "index"]);
 
-    Route::get('/admin/shop/address', [
-        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopAddressController::class,
+    ## 장바구니
+    Route::get('/admin/shop/cart', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopCartController::class,
         "index"]);
 
+    ## 주문내역
+    Route::get('/admin/shop/orders', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminOrdersController::class,
+        "index"]);
+
+    ## 주문상태
+    Route::get('/admin/shop/order/status', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopOrderStatusController::class,
+        "index"]);
+
+    ## 배송정보
     Route::get('/admin/shop/shipping', [
         \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopShippingsController::class,
         "index"]);
 
-    Route::get('/admin/shop/cart', [
-        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopCartController::class,
+    ## 배송방식 지정
+    Route::get('/admin/shop/shipping/method', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShippingMethodController::class,
         "index"]);
+
+    ## 결제내역
+    Route::get('/admin/shop/payment', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopPaymentController::class,
+        "index"]);
+
+    ## 배송주소록
+    Route::get('/admin/shop/address', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopAddressController::class,
+        "index"]);
+
+
+
+    Route::get('/admin/shop/phone', [
+        \Jiny\Shop\Order\Http\Controllers\Admin\AdminUserPhoneController::class,
+        "index"]);
+
+
+
+
+
+
 
     Route::get('/admin/order/items', [
         \Jiny\Shop\Order\Http\Controllers\Admin\AdminOrderItemsController::class,
         "index"]);
 
-    Route::get('/admin/shop/payment', [
-        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopPaymentController::class,
-        "index"]);
 
 
-    Route::get('/admin/order/status', [
-        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopOrderStatusController::class,
-        "index"]);
 
-    Route::get('/admin/shop/wish', [
-        \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopWishController::class,
-        "index"]);
+
+
+
 
     Route::get('/admin/shop/checkoutItems', [
         \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopCheckoutItemsController::class,
         "index"]);
 
 
-    Route::get('/admin/shop/orders', [
-        \Jiny\Shop\Order\Http\Controllers\Admin\AdminOrdersController::class,
-        "index"]);
+
 
     Route::get('/admin/shop/transactions', [
         \Jiny\Shop\Order\Http\Controllers\Admin\AdminShopTransactionsController::class,
