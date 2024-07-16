@@ -41,5 +41,13 @@ class JinyShopOrderServiceProvider extends ServiceProvider
         $this->app->afterResolving(BladeCompiler::class, function () {
             Livewire::component('ShopTransactions', \Jiny\Shop\Order\Http\Livewire\ShopTransactions::class);
         });
+
+        $this->app->afterResolving(BladeCompiler::class, function () {
+            Livewire::component('CartItems', \Jiny\Shop\Order\Http\Livewire\CartItems::class);
+        });
+
+        $this->app->afterResolving(BladeCompiler::class, function () {
+            Livewire::component('OrderSummary', \Jiny\Shop\Order\Http\Livewire\OrderSummary::class);
+        });
     }
 }
