@@ -13,7 +13,11 @@
             {{-- 테이블 리스트 --}}
             <x-wire-tbody-item :selected="$selected" :item="$item">
                 <td width='100'>
-                    <div>{{$item->order_id}}</div>
+                    <x-click wire:click="edit({{$item->id}})">
+                        {{$item->order_id}}
+                    </x-click>
+                </td>
+                <td width='100'>
                     <div>{{$item->orderidx}}</div>
                 </td>
                 <td width='300'>

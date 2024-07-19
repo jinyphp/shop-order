@@ -8,8 +8,9 @@ Route::middleware(['web'])
 ->name($shop_prefix)
 ->prefix($shop_prefix)->group(function () {
 
-
-
+    Route::get('/cart', [
+        \Jiny\Shop\Order\Http\Controllers\CartController::class,
+        "index"]);
 
     Route::get('/transactions', [
         \Jiny\Shop\Order\Http\Controllers\TransactionController::class,
@@ -20,9 +21,9 @@ Route::middleware(['web'])
         "index"]);
 
     // 장바구니, 관심상품
-    Route::get('/cart', [
-        \Jiny\Shop\Http\Controllers\CartController::class,
-        "index"])->name('shop.cart');
+    // Route::get('/cart', [
+    //     \Jiny\Shop\Http\Controllers\CartController::class,
+    //     "index"])->name('shop.cart');
 
     Route::get('/wishlist', [
         \Jiny\Shop\Order\Http\Controllers\WishController::class,

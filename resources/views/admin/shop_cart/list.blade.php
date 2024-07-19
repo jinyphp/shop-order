@@ -20,7 +20,9 @@
             {{-- 테이블 리스트 --}}
             <x-wire-tbody-item :selected="$selected" :item="$item">
                 <td width='50'>
-                    {{$item->cartidx}}
+                    <x-click wire:click="edit({{$item->id}})">
+                        {{$item->cartidx}}
+                    </x-click>
                 </td>
                 <td width='100'>{{$item->email}}</td>
                 <td width='100'>{{$item->product_id}}</td>

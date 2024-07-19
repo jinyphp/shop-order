@@ -22,8 +22,10 @@
             @foreach ($rows as $item)
             {{-- 테이블 리스트 --}}
             <x-wire-tbody-item :selected="$selected" :item="$item">
-                <td width='300'>
-                    {{$item->orderidx}}
+                <td width='50'>
+                    <x-click wire:click="edit({{$item->id}})">
+                        {{$item->orderidx}}
+                    </x-click>
                 </td>
                 <td width='100'>{{$item->email}}</td>
                 <td width='100'>{{$item->product_id}}</td>

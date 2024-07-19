@@ -28,7 +28,7 @@ class AdminShopPaymentController extends WireTablePopupForms
         $this->actions['view']['list'] = "jiny-shop-order::admin.shop_payment.list";
 
         // 신규 데이터 입력 및 수정폼 입니다.
-        $this->actions['view']['form'] = "jiny-shop-order::admin.shoppayment.form";
+        $this->actions['view']['form'] = "jiny-shop-order::admin.shop_payment.form";
     }
 
 
