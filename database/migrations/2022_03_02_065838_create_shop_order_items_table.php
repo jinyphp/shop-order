@@ -4,15 +4,10 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-/*
-상품별 주문 관리 테이블
-product_id: 상품 id
-order_id: 주문 id
-price: 가격
-quantity: 재고
-product_id를 foreign키로 하여 shop_products테이블과 조인
-order_id를 foreign키로 하여 shop_orders테이블과 조인
-*/
+/**
+ * 특정 주문에 속하는 개별 상품 정보를 저장하는 테이블
+ * 즉, 각 주문에 포함된 상품들의 세부 정보 관리
+ */
 
 return new class extends Migration
 {
@@ -30,15 +25,14 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
-            $table->bigInteger('product_id')->unsigned();
-            $table->bigInteger('order_id')->unsigned();
-            $table->decimal('price');
-            $table->integer('quantity');
+            $table->bigInteger('product_id')->unsigned(); // 주문한 상품의 id
+            $table->bigInteger('order_id')->unsigned(); // 관련 주문의 id
+            $table->decimal('price'); // 상품 단가
+            $table->integer('quantity'); // 주문 상품 수량
 
 
-
-            // $table->foreign('product_id')->references('id')->on('shop_products')->onDelete('cascade');
-            // $table->foreign('order_id')->references('id')->on('shop_orders')->onDelete('cascade');
+            // $table->foreign('product_id')->references('id')->on('shop_products')->onDelete('cascade'); // product_id를 foreign키로 하여 shop_products테이블과 조인
+            // $table->foreign('order_id')->references('id')->on('shop_orders')->onDelete('cascade'); // order_id를 foreign키로 하여 shop_orders테이블과 조인
         });
     }
 
