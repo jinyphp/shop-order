@@ -20,13 +20,13 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
-            $table->string('enable')->default(1);
-            $table->string('name');
+            $table->string('enable')->default(1); ## 결제 수단의 활성화 여부
+            $table->string('name'); ## 결제 수단의 이름 (신용카드, 페이팔 등)
 
             $table->string('test')->nullable();
             $table->string('code')->nullable();
             $table->string('payment')->nullable();
-            $table->string('pg_id')->nullable();
+            $table->string('pg_id')->nullable(); ## payment gateway id
             $table->string('pg_password')->nullable();
             $table->string('pg_key')->nullable();
             $table->string('pg_url')->nullable();
