@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
 
-class CartController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +16,7 @@ class CartController extends Controller
      */
     public function index(Request $request)
     {
-
-
-        $viewFile = "www::slot1.shop.cart";
+        $viewFile = "www::slot1.shop.order";
         return view($viewFile);
     }
 
