@@ -8,10 +8,14 @@ use Illuminate\Support\Facades\DB;
 class CartItems extends Component
 {
     public $cartItems;
+    public $viewfile;
 
     public function mount()
     {
         $this->loadCartItems();
+        if(!$this->viewfile){
+            $this->viewfile = 'jiny-shop-order::shop.cart.cart-items';
+        }
     }
 
     public function loadCartItems()
@@ -62,7 +66,7 @@ class CartItems extends Component
 
     public function render()
     {
-        return view('jiny-shop-order::shop.cart.cart-items', [
+        return view($this->viewfile, [
             'cartItems' => $this->cartItems
         ]);
     }

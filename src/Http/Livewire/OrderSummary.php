@@ -12,9 +12,14 @@ class OrderSummary extends Component
     public $tax = 0;
     public $saving = 0;
 
+    public $viewfile;
+
     public function mount()
     {
         $this->calculateSummary();
+        if(!$this->viewfile){
+            $this->viewfile = 'jiny-shop-order::shop.cart.order-summary';
+        }
     }
 
     public function calculateSummary()
@@ -38,6 +43,6 @@ class OrderSummary extends Component
 
     public function render()
     {
-        return view('jiny-shop-order::shop.cart.order-summary');
+        return view($this->viewfile);
     }
 }

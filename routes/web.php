@@ -8,10 +8,16 @@ Route::middleware(['web'])
 ->name($shop_prefix)
 ->prefix($shop_prefix)->group(function () {
 
-    // 카트질라 테스트용
+    // 카트질라 테스트용-----------
     Route::get('/home-grocery',[
         \Jiny\Shop\Order\Http\Controllers\Cartzilla\GroceryController::class,
         "index"]);
+
+    Route::get('/account-signin',[
+        \Jiny\Shop\Order\Http\Controllers\Cartzilla\AccountOrdersController::class,
+        "index"]);
+
+    // -----------------------
 
     Route::get('/order', [
         \Jiny\Shop\Order\Http\Controllers\OrderController::class,
