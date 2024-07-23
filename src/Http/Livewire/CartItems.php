@@ -46,6 +46,14 @@ class CartItems extends Component
         }
     }
 
+    public function updateQuantity($id, $quantity)
+    {
+        if ($quantity > 0) {
+            DB::table('shop_cart')->where('id', $id)->update(['quantity' => $quantity]);
+            $this->loadCartItems();
+        }
+    }
+
     public function removeItem($id)
     {
         DB::table('shop_cart')->where('id', $id)->delete();
