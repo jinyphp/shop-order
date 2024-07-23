@@ -6,27 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 
 
-/*
-주문 관리 테입ㄹ
-user_id: 주문한 유저의 id
-subtotal: 부분합
-discount: 할인
-tax: 세금
-total: 총 금액
-
-firstname: 이름
-lastname: 성
-mobile: 핸드폰 번호
-email: 이메일 주소
-line1: 도로명, 구
-line2: 도로명이하 주소 (아파트 동, 호수 등)
-city: 도시
-province: 주
-country: 나라
-zipcode: 우편번호
-status: 주문 상태('ordered','delivered','canceled'), 디폴트는 ordered
-is_shipping_different: 주소지와 실제 배송 주소지가 다른지 체크?
-user에 user_id를 foreign키로 하여 조인
+/**
+ * 주문 관리 테이블
 */
 return new class extends Migration
 {
@@ -35,7 +16,6 @@ return new class extends Migration
      *
      * @return void
      */
-    # 주문 관리 테이블
     public function up()
     {
         Schema::create('shop_orders', function (Blueprint $table) {
@@ -45,24 +25,24 @@ return new class extends Migration
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
-            $table->bigInteger('user_id')->unsigned();
-            $table->decimal('subtotal');
-            $table->decimal('discount')->default(0);
-            $table->decimal('tax');
-            $table->decimal('total');
+            $table->bigInteger('user_id')->unsigned(); // 주문한 유저의 id
+            $table->decimal('subtotal'); // 주문의 총 금액에서 세금과 할인을 제외한 금액
+            $table->decimal('discount')->default(0); // 할인 금액
+            $table->decimal('tax'); // 세금
+            $table->decimal('total'); // 총 주문 금액
 
-            $table->string('firstname');
-            $table->string('lastname')->nullable();
-            $table->string('mobile')->nullable();
-            $table->string('email');
-            $table->string('line1')->nullable();
-            $table->string('line2')->nullable();
-            $table->string('city')->nullable();
-            $table->string('province')->nullable();
-            $table->string('country')->nullable();
-            $table->string('zipcode')->nullable();
-            $table->enum('status',['ordered','delivered','canceled'])->default('ordered');
-            $table->boolean('is_shipping_different')->default(false);
+            $table->string('firstname'); // 이름
+            $table->string('lastname')->nullable(); // 성
+            $table->string('mobile')->nullable(); // 핸드폰 번호
+            $table->string('email'); // 이메일 주소
+            $table->string('line1')->nullable(); // 도로명, 구
+            $table->string('line2')->nullable(); // 도로명이하 주소 (아파트 동, 호수 등)
+            $table->string('city')->nullable(); // 도시
+            $table->string('province')->nullable(); // 주
+            $table->string('country')->nullable(); // 나라
+            $table->string('zipcode')->nullable(); // 우편번호
+            $table->enum('status',['ordered','delivered','canceled'])->default('ordered'); // 주문 상태
+            $table->boolean('is_shipping_different')->default(false); // 주소지와 실제 배송 주소지가 다른지 체크?
 
 
 

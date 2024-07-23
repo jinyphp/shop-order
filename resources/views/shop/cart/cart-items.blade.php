@@ -3,13 +3,14 @@
     <table class="table table-borderless w-100">
         <thead>
             <tr>
-                <th scope="col">상품</th>
-                <th scope="col">가격</th>
-                <th scope="col">수량</th>
-                <th scope="col">합계</th>
-                <th scope="col">삭제</th>
+                <th scope="col" class="text-center">상품</th>
+                <th scope="col" class="text-center">가격</th>
+                <th scope="col" class="text-center">수량</th>
+                <th scope="col" class="text-center">합계</th>
+                <th scope="col" class="text-center">삭제</th>
             </tr>
         </thead>
+
         <tbody>
             @foreach($cartItems as $item)
                 <tr>
@@ -24,7 +25,11 @@
                     </td>
                     <td class="align-middle">{{ number_format($item->price) }}</td>
                     <td class="align-middle">
-                        <input type="number" class="form-control" value="{{ $item->quantity }}" min="1" style="width: 70px;">
+                        <div class="d-flex align-items-center">
+                            <button wire:click="decrementQuantity({{ $item->id }})" class="btn btn-sm btn-secondary">-</button>
+                            <input type="number" class="form-control mx-2 text-center" value="{{ $item->quantity }}" min="1" style="width: 60px;" wire:change="updateQuantity({{ $item->id }}, $event.target.value)">
+                            <button wire:click="incrementQuantity({{ $item->id }})" class="btn btn-sm btn-secondary">+</button>
+                        </div>
                     </td>
                     <td class="align-middle">{{ number_format($item->price * $item->quantity) }}</td>
                     <td class="align-middle">
