@@ -13,12 +13,13 @@ class OrderSummary extends Component
     public $saving = 0;
 
     public $viewfile;
+    public $cartItems = [];
 
     public function mount()
     {
         $this->calculateSummary();
         if(!$this->viewfile){
-            $this->viewfile = 'jiny-shop-order::shop.cart.order-summary';
+            $this->viewfile = 'jiny-shop-order::cartzilla.cart.order-summary';
         }
     }
 

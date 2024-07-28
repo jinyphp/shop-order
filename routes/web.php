@@ -4,18 +4,37 @@ use Illuminate\Http\Request;
 
 $shop_prefix = "shop";
 
-Route::middleware(['web'])
-->name($shop_prefix)
-->prefix($shop_prefix)->group(function () {
+$cartzilla_prefix = "cartzilla";
 
+// 카트질라 테스트용
+Route::middleware(['web'])
+->name($cartzilla_prefix)
+->prefix($cartzilla_prefix)->group(function () {
     // 카트질라 테스트용-----------
     Route::get('/home-grocery',[
         \Jiny\Shop\Order\Http\Controllers\Cartzilla\GroceryController::class,
         "index"]);
 
-    Route::get('/account-signin',[
-        \Jiny\Shop\Order\Http\Controllers\Cartzilla\AccountOrdersController::class,
+    Route::get('/cart', [
+        \Jiny\Shop\Order\Http\Controllers\Cartzilla\CartController::class,
+         "index"]);
+
+
+});
+
+Route::middleware(['web'])
+->name($shop_prefix)
+->prefix($shop_prefix)->group(function () {
+
+    // // 카트질라 테스트용-----------
+    Route::get('/home-grocery',[
+        \Jiny\Shop\Order\Http\Controllers\Cartzilla\GroceryController::class,
         "index"]);
+
+    // Route::get('/cart', [
+    //     \Jiny\Shop\Order\Http\Controllers\Cartzilla\CartController::class,
+    //      "index"]);
+
 
     // -----------------------
 
