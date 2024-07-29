@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
 
-class GroceryController extends Controller
+class ShopCatalogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class GroceryController extends Controller
      */
     public function index(Request $request)
     {
-        $viewFile = "www::shop-grocery.home-grocery";
+        $viewFile = "www::shop-grocery.shop-catalog-grocery";
         return view($viewFile);
     }
 

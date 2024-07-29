@@ -10,9 +10,22 @@ $cartzilla_prefix = "cartzilla";
 Route::middleware(['web'])
 ->name($cartzilla_prefix)
 ->prefix($cartzilla_prefix)->group(function () {
-    // 카트질라 테스트용-----------
+
     Route::get('/home-grocery',[
         \Jiny\Shop\Order\Http\Controllers\Cartzilla\GroceryController::class,
+        "index"]);
+
+    Route::get('/shop-product-grocery',[
+        \Jiny\Shop\Order\Http\Controllers\Cartzilla\ShopProductController::class,
+        "index"]);
+
+    Route::get('/shop-catalog-grocery',[
+        \Jiny\Shop\Order\Http\Controllers\Cartzilla\ShopCatalogController::class,
+        "index"]);
+
+
+    Route::get('/404-grocery',[
+        \Jiny\Shop\Order\Http\Controllers\Cartzilla\Shop404Controller::class,
         "index"]);
 
     Route::get('/cart', [
@@ -29,18 +42,6 @@ Route::middleware(['web'])
 Route::middleware(['web'])
 ->name($shop_prefix)
 ->prefix($shop_prefix)->group(function () {
-
-    // // 카트질라 테스트용-----------
-    Route::get('/home-grocery',[
-        \Jiny\Shop\Order\Http\Controllers\Cartzilla\GroceryController::class,
-        "index"]);
-
-    // Route::get('/cart', [
-    //     \Jiny\Shop\Order\Http\Controllers\Cartzilla\CartController::class,
-    //      "index"]);
-
-
-    // -----------------------
 
     Route::get('/order', [
         \Jiny\Shop\Order\Http\Controllers\OrderController::class,

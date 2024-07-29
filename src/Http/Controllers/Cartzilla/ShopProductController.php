@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
 
-class AccountSigninController extends Controller
+class ShopProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class AccountSigninController extends Controller
      */
     public function index(Request $request)
     {
-        $viewFile = "www::shop-grocery.account-signin";
+        $viewFile = "www::shop-grocery.shop-product-grocery";
         return view($viewFile);
     }
 
