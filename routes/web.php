@@ -19,6 +19,10 @@ Route::middleware(['web'])
         \Jiny\Shop\Order\Http\Controllers\Cartzilla\CartController::class,
          "index"]);
 
+     Route::get('/wish', [
+        \Jiny\Shop\Order\Http\Controllers\Cartzilla\WishlistController::class,
+            "index"]);
+
 
 });
 

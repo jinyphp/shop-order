@@ -38,6 +38,16 @@
             </x-form-hor>
 
             <x-form-hor>
+                <x-form-label>가격</x-form-label>
+                <x-form-item>
+                    {!! xInputText()
+                        ->setWire('model.defer',"forms.price")
+                        ->setWidth("standard")
+                    !!}
+                </x-form-item>
+            </x-form-hor>
+
+            <x-form-hor>
                 <x-form-label>이미지</x-form-label>
                 <x-form-item>
                     {!! xInputText()

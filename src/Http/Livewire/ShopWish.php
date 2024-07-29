@@ -8,10 +8,14 @@ use Illuminate\Support\Facades\DB;
 class ShopWish extends Component
 {
     public $wishes;
+    public $viewfile;
 
     public function mount()
     {
         $this->loadWishes();
+        if(!$this->viewfile){
+            $this->viewfile = 'jiny-shop-order::cartzilla.wishlist.wish-items';
+        }
     }
 
     public function loadWishes()
@@ -25,8 +29,7 @@ class ShopWish extends Component
 
     public function render()
     {
-        $viewFile = 'jiny-shop-order::shop.wish.grid';
-        return view($viewFile, [
+        return view($this->viewfile, [
             'wishes' => $this->wishes
         ]);
     }
