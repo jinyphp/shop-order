@@ -17,7 +17,7 @@ class CartController extends Controller
     public function index(Request $request)
     {
 
-        $viewFile = "www::shop-grocery.checkout-v1-cart";
+        $viewFile = "www::shop-electronics.checkout-v1-cart";
         return view($viewFile);
     }
 

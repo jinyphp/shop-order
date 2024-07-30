@@ -16,7 +16,7 @@ class WishlistController extends Controller
      */
     public function index(Request $request)
     {
-        $viewFile = "www::shop-grocery.account-wishlist";
+        $viewFile = "www::shop-electronics.account-wishlist";
         return view($viewFile);
     }
 

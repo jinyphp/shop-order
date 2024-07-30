@@ -11,20 +11,20 @@ Route::middleware(['web'])
 ->name($cartzilla_prefix)
 ->prefix($cartzilla_prefix)->group(function () {
 
-    Route::get('/home-grocery',[
+    Route::get('/home/grocery',[
         \Jiny\Shop\Order\Http\Controllers\Cartzilla\GroceryController::class,
         "index"]);
 
-    Route::get('/shop-product-grocery',[
+    Route::get('/shop/product/grocery',[
         \Jiny\Shop\Order\Http\Controllers\Cartzilla\ShopProductController::class,
         "index"]);
 
-    Route::get('/shop-catalog-grocery',[
+    Route::get('/shop/catalog/grocery',[
         \Jiny\Shop\Order\Http\Controllers\Cartzilla\ShopCatalogController::class,
         "index"]);
 
 
-    Route::get('/404-grocery',[
+    Route::get('/404/grocery',[
         \Jiny\Shop\Order\Http\Controllers\Cartzilla\Shop404Controller::class,
         "index"]);
 
