@@ -13,15 +13,28 @@ use Jiny\Shop\Entities\ShopSliders;
 
 class ShopOrders extends Component
 {
-    public $orders;
+    public $orders = [];
+    public $viewfile;
+
+    public function mount()
+    {
+        $this->loadOrders();
+        if(!$this->viewfile){
+            $this->viewfile = 'jiny-shop-order::cartzilla.orderlist.order-list';
+        }
+    }
+
+    public function loadOrders()
+    {
+        $email = 'aaa'; // 이메일이 'aaa'인 사용자의 위시리스트 불러옴
+        $this->orders = DB::table('shop_orders')
+            ->where('email', $email)
+            ->get();
+    }
 
     public function render()
     {
-
-        $this->orders = DB::table('shop_orders')->get();
-
-        $viewFile = 'jiny-shop-order::shop.order.list';
-        return view($viewFile, [
+        return view($this->viewfile, [
             'orders'=>$this->orders,
         ]);
     }
