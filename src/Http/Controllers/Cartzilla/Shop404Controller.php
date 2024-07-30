@@ -5,10 +5,10 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-
+use Jiny\Site\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Auth;
 
-class Shop404Controller extends Controller
+class Shop404Controller extends SiteController
 {
     /**
      * Display a listing of the resource.

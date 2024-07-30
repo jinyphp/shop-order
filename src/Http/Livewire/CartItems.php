@@ -34,12 +34,14 @@ class CartItems extends Component
             ->delete();
 
         $this->loadCartItems();
+        $this->dispatch('cartUpdated');
     }
 
     public function incrementQuantity($id)
     {
         DB::table('shop_cart')->where('id', $id)->increment('quantity');
         $this->loadCartItems();
+        $this->dispatch('cartUpdated');
     }
 
     public function decrementQuantity($id)
@@ -48,6 +50,7 @@ class CartItems extends Component
         if ($item->quantity > 1) {
             DB::table('shop_cart')->where('id', $id)->decrement('quantity');
             $this->loadCartItems();
+            $this->dispatch('cartUpdated');
         }
     }
 
@@ -56,6 +59,7 @@ class CartItems extends Component
         if ($quantity > 0) {
             DB::table('shop_cart')->where('id', $id)->update(['quantity' => $quantity]);
             $this->loadCartItems();
+            $this->dispatch('cartUpdated');
         }
     }
 
@@ -63,12 +67,14 @@ class CartItems extends Component
     {
         DB::table('shop_cart')->where('id', $id)->delete();
         $this->loadCartItems();
+        $this->dispatch('cartUpdated');
     }
 
     public function clearCart()
     {
         DB::table('shop_cart')->where('email', 'aaa')->delete();
         $this->loadCartItems();
+        $this->dispatch('cartUpdated');
     }
 
     public function render()
