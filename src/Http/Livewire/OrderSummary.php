@@ -15,6 +15,8 @@ class OrderSummary extends Component
     public $viewfile;
     public $cartItems = [];
 
+    protected $listeners = ['cartUpdated' => 'calculateSummary'];
+
     public function mount()
     {
         $this->calculateSummary();
@@ -44,6 +46,11 @@ class OrderSummary extends Component
 
     public function render()
     {
-        return view($this->viewfile);
+        return view($this->viewfile, [
+            'subtotal' => $this->subtotal,
+            'saving' => $this->saving,
+            'tax' => $this->tax,
+            'total' => $this->total,
+        ]);
     }
 }

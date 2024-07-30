@@ -5,10 +5,11 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Jiny\Site\Http\Controllers\SiteController;
 
 use Illuminate\Support\Facades\Auth;
 
-class WishlistController extends Controller
+class WishlistController extends SiteController
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,7 @@ class WishlistController extends Controller
      */
     public function index(Request $request)
     {
-        $viewFile = "www::shop-grocery.account-wishlist";
+        $viewFile = "www::shop-electronics.account-wishlist";
         return view($viewFile);
     }
-
 }

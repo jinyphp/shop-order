@@ -5,10 +5,11 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Jiny\Site\Http\Controllers\SiteController;
 
 use Illuminate\Support\Facades\Auth;
 
-class CartController extends Controller
+class CartController extends SiteController
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +18,7 @@ class CartController extends Controller
     public function index(Request $request)
     {
 
-        $viewFile = "www::shop-grocery.checkout-v1-cart";
+        $viewFile = "www::shop-electronics.checkout-v1-cart";
         return view($viewFile);
     }
 

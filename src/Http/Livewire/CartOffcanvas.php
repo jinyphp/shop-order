@@ -5,36 +5,43 @@ namespace Jiny\Shop\Order\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
-class CartItems extends Component
+class CartOffcanvas extends Component
 {
     public $cartItems = [];
+    public $total = 0;
+    public $subtotal = 0;
+    public $tax = 0;
     public $viewfile;
+
+    protected $listeners = ['cartUpdated' => 'loadCartItems'];
 
     public function mount()
     {
         $this->loadCartItems();
+        $this->calculateSummary();
         if(!$this->viewfile){
-            $this->viewfile = 'jiny-shop-order::cartzilla.cart.cart-items';
+            $this->viewfile = 'jiny-shop-order::cartzilla.cart.cart-offcanvas';
         }
     }
 
     public function loadCartItems()
     {
-        $email = 'aaa';
+        $email = 'aaa'; // 현재 사용자의 이메일 주소를 사용해야 합니다.
         $this->cartItems = DB::table('shop_cart')
             ->where('email', $email)
             ->get()
             ->toArray();
+        $this->calculateSummary();
     }
 
-    public function removeFromCart($id)
+    public function calculateSummary()
     {
-        DB::table('shop_cart')
-            ->where('id', $id)
-            ->delete();
+        $this->subtotal = array_sum(array_map(function ($item) {
+            return $item->price * $item->quantity;
+        }, $this->cartItems));
 
-        $this->loadCartItems();
-        $this->dispatch('cartUpdated');
+        $this->tax = $this->subtotal * 0.1; // 예시로 세금을 10%로 계산
+        $this->total = $this->subtotal + $this->tax;
     }
 
     public function incrementQuantity($id)
@@ -49,15 +56,6 @@ class CartItems extends Component
         $item = DB::table('shop_cart')->where('id', $id)->first();
         if ($item->quantity > 1) {
             DB::table('shop_cart')->where('id', $id)->decrement('quantity');
-            $this->loadCartItems();
-            $this->dispatch('cartUpdated');
-        }
-    }
-
-    public function updateQuantity($id, $quantity)
-    {
-        if ($quantity > 0) {
-            DB::table('shop_cart')->where('id', $id)->update(['quantity' => $quantity]);
             $this->loadCartItems();
             $this->dispatch('cartUpdated');
         }
@@ -80,7 +78,10 @@ class CartItems extends Component
     public function render()
     {
         return view($this->viewfile, [
-            'cartItems' => $this->cartItems
+            'cartItems' => $this->cartItems,
+            'total' => $this->total,
+            'subtotal' => $this->subtotal,
+            'tax' => $this->tax
         ]);
     }
 }
