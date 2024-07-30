@@ -7,11 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 class CartItems extends Component
 {
-    public $cartItems;
+    public $cartItems = [];
+    public $viewfile;
 
     public function mount()
     {
         $this->loadCartItems();
+        if(!$this->viewfile){
+            $this->viewfile = 'jiny-shop-order::cartzilla.cart.cart-items';
+        }
     }
 
     public function loadCartItems()
@@ -19,7 +23,8 @@ class CartItems extends Component
         $email = 'aaa';
         $this->cartItems = DB::table('shop_cart')
             ->where('email', $email)
-            ->get();
+            ->get()
+            ->toArray();
     }
 
     public function removeFromCart($id)
@@ -60,9 +65,15 @@ class CartItems extends Component
         $this->loadCartItems();
     }
 
+    public function clearCart()
+    {
+        DB::table('shop_cart')->where('email', 'aaa')->delete();
+        $this->loadCartItems();
+    }
+
     public function render()
     {
-        return view('jiny-shop-order::shop.cart.cart-items', [
+        return view($this->viewfile, [
             'cartItems' => $this->cartItems
         ]);
     }

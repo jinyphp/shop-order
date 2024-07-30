@@ -25,6 +25,7 @@ return new class extends Migration
             ## 상품정보
             $table->bigInteger('product_id'); // 제품 번호
             $table->string('product'); // 제품명
+            $table->string('price'); // 제품 가격
             $table->string('image')->nullable();
 
             ##
