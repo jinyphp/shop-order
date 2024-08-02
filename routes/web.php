@@ -40,6 +40,10 @@ Route::middleware(['web'])
         \Jiny\Shop\Order\Http\Controllers\Cartzilla\OrderController::class,
             "index"]);
 
+    Route::get('/delivery', [
+        \Jiny\Shop\Order\Http\Controllers\Cartzilla\DeliveryController::class,
+            "index"]);
+
 
 });
 
