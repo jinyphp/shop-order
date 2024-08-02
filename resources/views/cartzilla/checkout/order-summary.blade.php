@@ -5,7 +5,7 @@
                 <div class="d-flex align-items-center justify-content-between mb-4">
                     <h5 class="mb-0">Order summary</h5>
                     <div class="nav">
-                        <a class="nav-link text-decoration-underline p-0" href="checkout-v1-cart">Edit</a>
+                        <a class="nav-link text-decoration-underline p-0" href="cart">Edit</a>
                     </div>
                 </div>
                 <a class="d-flex align-items-center gap-2 text-decoration-none" href="#orderPreview" data-bs-toggle="offcanvas">
