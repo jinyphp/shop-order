@@ -10,10 +10,14 @@ class PaymentSelection extends Component
 
     public $paymentMethods;
     public $selectedPaymentMethod;
+    public $viewfile;
 
     public function mount()
     {
         $this->loadPaymentMethods();
+        if(!$this->viewfile){
+            $this->viewfile = 'jiny-shop-order::cartzilla.checkout.payment-selection';
+        }
     }
 
     public function loadPaymentMethods()
@@ -30,7 +34,7 @@ class PaymentSelection extends Component
 
     public function render()
     {
-        return view('jiny-shop-order::shop.order.payment-selection', [
+        return view($this->viewfile, [
             'paymentMethods' => $this->paymentMethods,
             'selectedPaymentMethod' => $this->selectedPaymentMethod,
         ]);

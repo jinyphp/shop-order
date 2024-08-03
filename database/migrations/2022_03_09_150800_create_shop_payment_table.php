@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('enable')->default(1); ## 결제 수단의 활성화 여부
             $table->string('name'); ## 결제 수단의 이름 (신용카드, 페이팔 등)
 
+            $table->string('image')->nullable(); ## 결제수단 이미지
             $table->string('test')->nullable();
             $table->string('code')->nullable();
             $table->string('payment')->nullable();

@@ -3,6 +3,7 @@
     <x-wire-thead>
         <th width='50'>id</th>
         <th width='200'>이름</th>
+        <th width='200'>이미지</th>
         <th width='100'>test</th>
         <th width='100'>code</th>
         <th width='200'>payment</th>
@@ -20,6 +21,7 @@
                     </x-click>
                 </td>
                 <td width='200'>{{$item->name}}</td>
+                <td width='200'>{{$item->image}}</td>
                 <td width='100'>{{$item->test}}</td>
                 <td width='100'>{{$item->code}}</td>
                 <td width='200'>{{$item->payment}}</td>

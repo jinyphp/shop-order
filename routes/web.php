@@ -45,6 +45,11 @@ Route::middleware(['web'])
             "index"]);
 
 
+     Route::get('/payment', [
+         \Jiny\Shop\Order\Http\Controllers\Cartzilla\PaymentController::class,
+            "index"]);
+
+
 });
 
 Route::middleware(['web'])
