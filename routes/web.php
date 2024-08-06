@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 
 $shop_prefix = "shop";
 
-$cartzilla_prefix = "cartzilla";
+$cartzilla_prefix = "shop/electronics";
 
 // 카트질라 테스트용
 Route::middleware(['web'])
