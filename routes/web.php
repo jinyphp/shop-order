@@ -32,7 +32,7 @@ Route::middleware(['web'])
         \Jiny\Shop\Order\Http\Controllers\Cartzilla\CartController::class,
          "index"]);
 
-     Route::get('/wish', [
+     Route::get('/account-wishlist', [
         \Jiny\Shop\Order\Http\Controllers\Cartzilla\WishlistController::class,
             "index"]);
 

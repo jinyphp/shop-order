@@ -4,14 +4,24 @@ namespace Jiny\Shop\Order\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CartItems extends Component
 {
     public $cartItems = [];
     public $viewfile;
+    private $email;
 
     public function mount()
     {
+        // $email = 'aaa';
+        $user = Auth::user();
+        if($user){
+            $this->email = $user->email;
+        } else {
+            $this->email = null;
+        }
+
         $this->loadCartItems();
         if(!$this->viewfile){
             $this->viewfile = 'jiny-shop-order::cartzilla.cart.cart-items';
@@ -20,11 +30,12 @@ class CartItems extends Component
 
     public function loadCartItems()
     {
-        $email = 'aaa';
+       if($this->email){
         $this->cartItems = DB::table('shop_cart')
-            ->where('email', $email)
+            ->where('email', $this->email)
             ->get()
             ->toArray();
+       }
     }
 
     public function removeFromCart($id)
@@ -79,8 +90,15 @@ class CartItems extends Component
 
     public function render()
     {
-        return view($this->viewfile, [
-            'cartItems' => $this->cartItems
-        ]);
+
+        ## blade에서 하거나 else로 return하거나
+        ## blade에서 하면 디자이너가 공부해야함
+        if($this->email){
+            return view($this->viewfile, [
+                'cartItems' => $this->cartItems
+            ]);
+        } else {
+            return view();
+        }
     }
 }
