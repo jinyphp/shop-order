@@ -51,7 +51,7 @@
       </div>
       <div class="d-flex w-100 gap-3">
         <a class="btn btn-lg btn-secondary w-100 rounded-pill" href="cart">View cart</a>
-        <a class="btn btn-lg btn-primary w-100 rounded-pill" href="checkout-v2-delivery">Checkout</a>
+        <a class="btn btn-lg btn-primary w-100 rounded-pill" href="delivery">Checkout</a>
       </div>
     </div>
   </div>
