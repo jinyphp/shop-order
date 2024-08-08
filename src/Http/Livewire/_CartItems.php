@@ -1,5 +1,4 @@
 <?php
-
 namespace Jiny\Shop\Order\Http\Livewire;
 
 use Livewire\Component;

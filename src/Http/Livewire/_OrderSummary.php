@@ -1,9 +1,9 @@
 <?php
-
 namespace Jiny\Shop\Order\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+
 
 class OrderSummary extends Component
 {
@@ -15,7 +15,7 @@ class OrderSummary extends Component
     public $viewfile;
     public $cartItems = [];
 
-    protected $listeners = ['cartUpdated' => 'calculateSummary'];
+
 
     public function mount()
     {
@@ -25,6 +25,7 @@ class OrderSummary extends Component
         }
     }
 
+    protected $listeners = ['cartUpdated' => 'calculateSummary'];
     public function calculateSummary()
     {
         $email = 'aaa';

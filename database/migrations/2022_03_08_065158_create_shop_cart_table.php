@@ -32,14 +32,26 @@ return new class extends Migration
             $table->string('product'); // 제품명
             $table->string('image')->nullable(); // 제품 이미지
 
+            ## 옵션 정보
             $table->string('option')->nullable(); // 제품 옵션
+            $table->string('option_peice')->nullable(); // 옵션 할인
+            $table->string('option_discount')->nullable(); // 옵션 할인
 
             $table->string('price')->nullable(); // 제품 가격
+            $table->string('discount')->nullable();  // 할인금액(개별단가)
+
+
             $table->string('quantity')->default(1); // 제품 수량
+            $table->string('unit')->nullable(); // 단위
+            $table->string('Portion')->nullable(); // 단위
+
+
             $table->text('content')->nullable();    // 주문 추가정보 text
 
             ##
             $table->string('expire')->nullable();   // 만료일자시 삭제
+
+            ## 나중에 구매
             $table->string('later')->nullable();
 
 
