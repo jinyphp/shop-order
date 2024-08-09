@@ -8,18 +8,32 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Auth;
 
+use Jiny\Site\Http\Controllers\SiteController;
 class WishController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setVisit($this);
+
+        ## actions 기본설정 동작처리
+        $this->setActions();
+    }
+
+    private function setActions()
+    {
+        $actions['title'] = "찜목록";
+        $actions['subtitle'] = "";
+
+        // 레이아웃을 커스텀 변경합니다.
+        $actions['view']['layout'] = "wish";
+
+        $this->setReflectActions($actions);
+    }
+
     public function index(Request $request)
     {
-
-
-        $viewFile = "www::slot1.shop.wishList";
-        return view($viewFile);
+        return parent::index($request);
     }
 
 }
