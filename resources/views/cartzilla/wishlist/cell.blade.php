@@ -4,7 +4,11 @@
         <div class="position-relative">
             <div class="position-absolute top-0 end-0 z-1 pt-1 pe-1 mt-2 me-2">
                 <div class="form-check fs-lg">
-                    <input type="checkbox" class="form-check-input select-card-check" checked>
+                    {{-- <input type="checkbox" class="form-check-input select-card-check" checked> --}}
+                    <input type='checkbox' name='ids'
+                        value="{{ $item['id'] }}"
+                        class="form-check-input select-card-check"
+                        wire:model.live="selected">
                 </div>
             </div>
             <a class="d-block rounded-top overflow-hidden p-3 p-sm-4" href="#">

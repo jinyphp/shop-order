@@ -17,6 +17,7 @@ class ShopWish extends Component
     public $user_email;
 
     public $rows = [];
+    public $selected = [];
 
     public function mount()
     {
@@ -38,7 +39,6 @@ class ShopWish extends Component
     {
         // 사용자 wish 목록 조회
         $rows = $this->getUserWish();
-
         $this->loadRatings();
 
         return view($this->viewFile, [
@@ -56,6 +56,7 @@ class ShopWish extends Component
             ->get();
 
             // 배열 변환
+            $this->rows = []; // 초기화
             foreach ($rows as $item) {
                 $temp = [];
                 $id = $item->id;
@@ -125,6 +126,25 @@ class ShopWish extends Component
 
         $this->rows = $rows;
         */
+    }
+
+    public function removeItems()
+    {
+        //dd($this->selected);
+        DB::table('shop_wish')
+            ->whereIn('id', $this->selected)
+            ->delete();
+    }
+
+    public function reload()
+    {
+        // 화면 갱신용
+        // 작업 내용 없음.
+    }
+
+    public function addCard()
+    {
+        // wish 상품을 장바구니로 이동
     }
 
 
