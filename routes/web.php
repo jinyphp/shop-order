@@ -89,9 +89,13 @@ Route::middleware(['web'])->group(function () {
     //     \Jiny\Shop\Http\Controllers\CartController::class,
     //     "index"])->name('shop.cart');
 
-    Route::get('/wishlist', [
-        \Jiny\Shop\Order\Http\Controllers\WishController::class,
-        "index"]);
+    // Route::get('/wishlist', [
+    //     \Jiny\Shop\Order\Http\Controllers\WishController::class,
+    //     "index"]);
+
+    Route::get('/wish', [
+            \Jiny\Shop\Order\Http\Controllers\WishController::class,
+            "index"]);
 
     Route::get('/checkout', [
         \Jiny\Shop\Order\Http\Controllers\CheckoutController::class,

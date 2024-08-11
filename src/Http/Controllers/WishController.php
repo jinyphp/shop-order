@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use Jiny\Site\Http\Controllers\SiteController;
-class WishController extends Controller
+class WishController extends SiteController
 {
     public function __construct()
     {
