@@ -31,6 +31,13 @@ class JinyShopOrderServiceProvider extends ServiceProvider
     {
         /* 라이브와이어 컴포넌트 등록 */
         $this->app->afterResolving(BladeCompiler::class, function () {
+            Livewire::component('shop-cart-item', \Jiny\Shop\Order\Http\Livewire\ShopCartItem::class);
+
+            Livewire::component('shop-cart-summary', \Jiny\Shop\Order\Http\Livewire\ShopCartSummary::class);
+        });
+
+        /* 라이브와이어 컴포넌트 등록 */
+        $this->app->afterResolving(BladeCompiler::class, function () {
             Livewire::component('ShopOrders', \Jiny\Shop\Order\Http\Livewire\ShopOrders::class);
         });
 
@@ -42,13 +49,13 @@ class JinyShopOrderServiceProvider extends ServiceProvider
             Livewire::component('ShopTransactions', \Jiny\Shop\Order\Http\Livewire\ShopTransactions::class);
         });
 
-        $this->app->afterResolving(BladeCompiler::class, function () {
-            Livewire::component('CartItems', \Jiny\Shop\Order\Http\Livewire\CartItems::class);
-        });
+        // $this->app->afterResolving(BladeCompiler::class, function () {
+        //     Livewire::component('CartItems', \Jiny\Shop\Order\Http\Livewire\CartItems::class);
+        // });
 
-        $this->app->afterResolving(BladeCompiler::class, function () {
-            Livewire::component('OrderSummary', \Jiny\Shop\Order\Http\Livewire\OrderSummary::class);
-        });
+        // $this->app->afterResolving(BladeCompiler::class, function () {
+        //     Livewire::component('OrderSummary', \Jiny\Shop\Order\Http\Livewire\OrderSummary::class);
+        // });
 
         $this->app->afterResolving(BladeCompiler::class, function () {
             Livewire::component('AddressForm', \Jiny\Shop\Order\Http\Livewire\AddressForm::class);

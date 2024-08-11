@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -13,26 +12,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('shop_wish', function (Blueprint $table) {
+        Schema::create('shop_order_items', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->integer('ref')->default(0);
             $table->integer('level')->default(0);
             $table->integer('pos')->default(1);
 
-            $table->string('email'); //주문자정보
-
-            ## 상품정보
-            $table->bigInteger('product_id')->nullable(); // 제품 번호
-            $table->string('product')->nullable(); // 제품명
-            $table->string('price')->nullable(); // 제품 가격
-            $table->string('image')->nullable();
-
-            ##
-            $table->string('expire')->nullable();   // 만료일자시 삭제
-            $table->string('later')->nullable();
+            $table->bigInteger('product_id')->unsigned();
+            $table->bigInteger('order_id')->unsigned();
+            $table->decimal('price');
+            $table->integer('quantity');
 
 
+
+            $table->foreign('product_id')->references('id')->on('shop_products')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('shop_orders')->onDelete('cascade');
         });
     }
 
@@ -43,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shop_wish');
+        Schema::dropIfExists('shop_order_items');
     }
 };
