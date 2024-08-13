@@ -14,10 +14,14 @@ class ShopWish extends Component
     public $viewFile;
     public $viewCell;
 
+    // public $user_email = 'aaa';
     public $user_email;
 
     public $rows = [];
     public $selected = [];
+
+    // 카트 주문정보
+    public $cartidx;
 
     public function mount()
     {
@@ -33,6 +37,8 @@ class ShopWish extends Component
         if(!$this->viewCell){
             $this->viewCell = 'jiny-shop-order::cartzilla.wishlist.cell';
         }
+
+        $this->checkExistingCart();
     }
 
     public function render()
@@ -142,10 +148,77 @@ class ShopWish extends Component
         // 작업 내용 없음.
     }
 
-    public function addCard()
+    // public function addCart()
+    // {
+    //     // wish 상품을 장바구니로 이동
+    // }
+
+    public function generateUniqueCartId()
     {
-        // wish 상품을 장바구니로 이동
+        // 고유의 ID를 생성
+        $id = uniqid(mt_rand(), true);
+        $code = substr(hash('sha256',$id),0,15); // 10자리 추출
+        return date("Ymd-his")."-".$code;
     }
+
+    public function checkExistingCart(){
+        // 이전에 장바구니가 있는 경우 확인
+        $check = DB::table('shop_cart')
+            ->where('email',$this->user_email)
+            ->orderBy('id', "desc") // 가장 최신
+            ->first();
+        if ($check) {
+            // 카트번호 저장
+            $this->cartidx = $check->cartidx;
+        }
+
+        if(!$this->cartidx) {
+            $this->cartidx = $this->generateUniqueCartId();
+        }
+
+    }
+
+    public function addCart()
+{
+    // 선택된 상품들에 대해 반복 처리
+    foreach ($this->selected as $wishItemId) {
+        // 위시리스트에서 해당 상품 가져오기
+        $wishItem = DB::table('shop_wish')->where('id', $wishItemId)->first();
+
+        if ($wishItem) {
+            // 장바구니에 이미 동일한 상품이 있는지 확인
+            $existingCartItem = DB::table('shop_cart')
+                ->where('cartidx', $this->cartidx)
+                ->where('product_id', $wishItem->product_id)
+                ->first();
+
+            if ($existingCartItem) {
+                // 이미 존재하는 상품의 수량을 +1
+                DB::table('shop_cart')
+                    ->where('id', $existingCartItem->id)
+                    ->increment('quantity');
+            } else {
+                // 장바구니에 상품 추가하기
+                DB::table('shop_cart')->insert([
+                    'cartidx' => $this->cartidx, // 기존 또는 고유 카트 생성번호
+                    'email' => $this->user_email, // 사용자 이메일
+                    'product_id' => $wishItem->product_id, // 제품 번호
+                    'product' => $wishItem->product, // 제품명
+                    'image' => $wishItem->image, // 제품 이미지
+                    'price' => $wishItem->price, // 제품 가격
+                    'quantity' => 1, // 기본 수량 1로 설정
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            // 위시리스트에서 해당 항목 제거하기
+            DB::table('shop_wish')->where('id', $wishItemId)->delete();
+        }
+    }
+}
+
+
 
 
 

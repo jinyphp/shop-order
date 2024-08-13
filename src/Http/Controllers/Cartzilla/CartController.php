@@ -18,7 +18,7 @@ class CartController extends SiteController
     public function index(Request $request)
     {
 
-        $viewFile = "www::shop-electronics.checkout-v1-cart";
+        $viewFile = "www::shop_fashion-v1.cart";
         return view($viewFile);
     }
 
