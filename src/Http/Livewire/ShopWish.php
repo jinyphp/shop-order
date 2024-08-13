@@ -155,10 +155,12 @@ class ShopWish extends Component
 
     public function generateUniqueCartId()
     {
+        return generateUniqueCartId();
+
         // 고유의 ID를 생성
-        $id = uniqid(mt_rand(), true);
-        $code = substr(hash('sha256',$id),0,15); // 10자리 추출
-        return date("Ymd-his")."-".$code;
+        // $id = uniqid(mt_rand(), true);
+        // $code = substr(hash('sha256',$id),0,15); // 10자리 추출
+        // return date("Ymd-his")."-".$code;
     }
 
     public function checkExistingCart(){
@@ -179,44 +181,48 @@ class ShopWish extends Component
     }
 
     public function addCart()
-{
-    // 선택된 상품들에 대해 반복 처리
-    foreach ($this->selected as $wishItemId) {
-        // 위시리스트에서 해당 상품 가져오기
-        $wishItem = DB::table('shop_wish')->where('id', $wishItemId)->first();
+    {
+        // 선택된 상품들에 대해 반복 처리
+        foreach ($this->selected as $wishItemId) {
+            // 위시리스트에서 해당 상품 가져오기
+            // $wishItem = DB::table('shop_wish')
+            //     ->where('id', $wishItemId)->first();
 
-        if ($wishItem) {
-            // 장바구니에 이미 동일한 상품이 있는지 확인
-            $existingCartItem = DB::table('shop_cart')
-                ->where('cartidx', $this->cartidx)
-                ->where('product_id', $wishItem->product_id)
-                ->first();
+            $wishItem = $this->rows[$wishItemId];
 
-            if ($existingCartItem) {
-                // 이미 존재하는 상품의 수량을 +1
-                DB::table('shop_cart')
-                    ->where('id', $existingCartItem->id)
-                    ->increment('quantity');
-            } else {
-                // 장바구니에 상품 추가하기
-                DB::table('shop_cart')->insert([
-                    'cartidx' => $this->cartidx, // 기존 또는 고유 카트 생성번호
-                    'email' => $this->user_email, // 사용자 이메일
-                    'product_id' => $wishItem->product_id, // 제품 번호
-                    'product' => $wishItem->product, // 제품명
-                    'image' => $wishItem->image, // 제품 이미지
-                    'price' => $wishItem->price, // 제품 가격
-                    'quantity' => 1, // 기본 수량 1로 설정
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+            if ($wishItem) {
+                // 장바구니에 이미 동일한 상품이 있는지 확인
+                $existingCartItem = DB::table('shop_cart')
+                    ->where('cartidx', $this->cartidx)
+                    ->where('product_id', $wishItem->product_id)
+                    ->first();
+
+                if ($existingCartItem) {
+                    // 이미 존재하는 상품의 수량을 +1
+                    DB::table('shop_cart')
+                        ->where('id', $existingCartItem->id)
+                        ->increment('quantity');
+                } else {
+                    // 장바구니에 상품 추가하기
+                    DB::table('shop_cart')->insert([
+                        'cartidx' => $this->cartidx, // 기존 또는 고유 카트 생성번호
+                        'email' => $this->user_email, // 사용자 이메일
+                        'product_id' => $wishItem->product_id, // 제품 번호
+                        'product' => $wishItem->product, // 제품명
+                        'image' => $wishItem->image, // 제품 이미지
+                        'price' => $wishItem->price, // 제품 가격
+                        'quantity' => 1, // 기본 수량 1로 설정
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+
+                // 위시리스트에서 해당 항목 제거하기
+                DB::table('shop_wish')->where('id', $wishItemId)->delete();
+                unset($this->rows[$wishItemId]);
             }
-
-            // 위시리스트에서 해당 항목 제거하기
-            DB::table('shop_wish')->where('id', $wishItemId)->delete();
         }
     }
-}
 
 
 
