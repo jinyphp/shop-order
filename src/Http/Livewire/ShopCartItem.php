@@ -20,19 +20,6 @@ class ShopCartItem extends Component
             $this->viewFile = 'jiny-shop-order::shop.cart.table';
         }
 
-        // // 이메일 하드코딩
-        // $userEmail = 'aaa';
-
-        // // 이전에 장바구니가 있는 경우 확인
-        // $check = DB::table('shop_cart')
-        //     ->where('email', $userEmail)
-        //     ->orderBy('id', "desc") // 가장 최신
-        //     ->first();
-        // if ($check) {
-        //     // 카트번호 저장
-        //     $this->cartidx = $check->cartidx;
-        // }
-
         // 회원 인증여부 체크
         if($user = Auth::user()) {
             // 이전에 장바구니가 있는 경우 확인
@@ -107,8 +94,6 @@ class ShopCartItem extends Component
 
     public function incrementQuantity($id)
     {
-        //
-        //$this->loadCartItems();
         $this->cart[$id]['quantity']++;
         $this->cart[$id]['total'] = $this->calculateTotal($id);
 
@@ -119,12 +104,6 @@ class ShopCartItem extends Component
 
     public function decrementQuantity($id)
     {
-        // $item = DB::table('shop_cart')->where('id', $id)->first();
-        // if ($item->quantity > 1) {
-        //     DB::table('shop_cart')->where('id', $id)->decrement('quantity');
-        //     //$this->loadCartItems();
-        //     $this->dispatch('cartUpdated');
-        // }
         if($this->cart[$id]['quantity'] > 0) {
             $this->cart[$id]['quantity']--;
             $this->cart[$id]['total'] = $this->calculateTotal($id);

@@ -4,84 +4,140 @@ namespace Jiny\Shop\Order\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CartOffcanvas extends Component
 {
-    public $cartItems = [];
-    public $total = 0;
+    public $cart = [];
     public $subtotal = 0;
-    public $tax = 0;
     public $viewfile;
 
-    protected $listeners = ['cartUpdated' => 'loadCartItems'];
+    // 카트 주문정보
+    public $cartidx;
 
     public function mount()
     {
-        $this->loadCartItems();
-        $this->calculateSummary();
         if(!$this->viewfile){
             $this->viewfile = 'jiny-shop-order::cartzilla.cart.cart-offcanvas';
         }
+
+        // 사용자 인증 여부 체크
+        if ($user = Auth::user()){
+            // 이전에 장바구니가 있는지 확인
+            $check = DB::table('shop_cart')
+                -> where('email', $user->email)
+                ->orderBy('id', "desc")
+                ->first();
+
+            if ($check){
+                // 카트 번호 저장
+                $this->cartidx = $check->cartidx;
+            }
+        }
+
+        // 카트 번호가 없는 경우 신규로 생성
+        if(!$this->cartidx) {
+            $this->cartidx = $this->generateUniqueCartId();
+        }
+
+        if($this->cartidx) {
+            // 카트 번호를 이용하여 정보를 확인
+            $rows = DB::table('shop_cart')
+                ->where('cartidx', $this->cartidx)
+                ->orderBy('id',"desc")
+                ->get();
+
+            // 프로퍼티 배열에 저장
+            foreach($rows as $item) {
+                $temp = [];
+                $id = $item->id;
+                foreach($item as $key => $value) {
+                    $temp[$key] = $value;
+                }
+
+                // Total 계산
+                $temp['total'] = ($item->price - $item->discount) * $item->quantity;
+
+                $this->cart[$id] = $temp;
+            }
+            // Subtotal 계산
+            $this->calculateSubtotal();
+        }
     }
 
-    public function loadCartItems()
-    {
-        $email = 'aaa'; // 현재 사용자의 이메일 주소를 사용해야 합니다.
-        $this->cartItems = DB::table('shop_cart')
-            ->where('email', $email)
-            ->get()
-            ->toArray();
-        $this->calculateSummary();
-    }
-
-    public function calculateSummary()
+    public function calculateSubtotal()
     {
         $this->subtotal = array_sum(array_map(function ($item) {
-            return $item->price * $item->quantity;
-        }, $this->cartItems));
+            return ($item['price'] - $item['discount']) * $item['quantity'];
+        }, $this->cart));
+    }
 
-        $this->tax = $this->subtotal * 0.1; // 예시로 세금을 10%로 계산
-        $this->total = $this->subtotal + $this->tax;
+    public function generateUniqueCartId()
+    {
+        // 고유의 ID를 생성
+        $id = uniqid(mt_rand(), true);
+        $code = substr(hash('sha256',$id),0,15); // 10자리 추출
+        return date("Ymd-his")."-".$code;
     }
 
     public function incrementQuantity($id)
     {
+        $this->cart[$id]['quantity']++;
+        $this->calculateSubtotal();
+
         DB::table('shop_cart')->where('id', $id)->increment('quantity');
-        $this->loadCartItems();
-        $this->dispatch('cartUpdated');
+
+        $this->dispatch('cartUpdated', $this->cart[$id]);
     }
 
     public function decrementQuantity($id)
     {
-        $item = DB::table('shop_cart')->where('id', $id)->first();
-        if ($item->quantity > 1) {
+        if($this->cart[$id]['quantity'] > 0) {
+            $this->cart[$id]['quantity']--;
+            $this->calculateSubtotal();
+
             DB::table('shop_cart')->where('id', $id)->decrement('quantity');
-            $this->loadCartItems();
-            $this->dispatch('cartUpdated');
         }
+
+        $this->dispatch('cartUpdated', $this->cart[$id]);
     }
 
     public function removeItem($id)
     {
         DB::table('shop_cart')->where('id', $id)->delete();
-        $this->loadCartItems();
+        unset($this->cart[$id]); // 배열삭제
+
+        $this->calculateSubtotal();
+
+        session()->flash('success_message',"item has been removed");
         $this->dispatch('cartUpdated');
     }
 
     public function clearCart()
     {
-        DB::table('shop_cart')->where('email', 'aaa')->delete();
-        $this->loadCartItems();
+        DB::table('shop_cart')->where('cartidx', $this->cartidx)->delete();
+        $this->cart = []; // 초기화
+
+        session()->flash('success_message',"item has been all removed");
         $this->dispatch('cartUpdated');
     }
 
     public function render()
     {
-        return view($this->viewfile, [
-            'cartItems' => $this->cartItems,
-            'total' => $this->total,
-            'subtotal' => $this->subtotal,
-            'tax' => $this->tax
-        ]);
+        if($this->cartidx) {
+            return view($this->viewfile, [
+
+            ]);
+        }
+    }
+
+    protected $listeners = [
+        'requestCartItem' => 'getCartItem'
+    ];
+
+    public function getCartItem()
+    {
+        // Dispatch an event back to the first component with the cart item data
+        $this->dispatch('updatedCartItem', $this->cart);
     }
 }
