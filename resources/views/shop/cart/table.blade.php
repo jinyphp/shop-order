@@ -51,9 +51,9 @@
                             </h5>
                             <ul class="list-unstyled gap-1 fs-xs mb-0">
                                 <li>
-                                    <span class="text-body-secondary">Portion:</span>
+                                    <span class="text-body-secondary">option:</span>
                                     <span
-                                        class="text-dark-emphasis fw-medium">1kg</span>
+                                        class="text-dark-emphasis fw-medium">{{ $item['option'] }}</span>
                                 </li>
                                 <li class="d-xl-none">
                                     <span class="text-body-secondary">Price:</span>
