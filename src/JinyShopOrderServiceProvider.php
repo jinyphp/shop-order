@@ -85,6 +85,10 @@ class JinyShopOrderServiceProvider extends ServiceProvider
             Livewire::component('PaymentSelection', \Jiny\Shop\Order\Http\Livewire\PaymentSelection::class);
         });
 
+        $this->app->afterResolving(BladeCompiler::class, function () {
+            Livewire::component('CartButton', \Jiny\Shop\Order\Http\Livewire\CartButton::class);
+        });
+
 
     }
 }

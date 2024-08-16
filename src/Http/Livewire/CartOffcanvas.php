@@ -24,10 +24,7 @@ class CartOffcanvas extends Component
         // 사용자 인증 여부 체크
         if ($user = Auth::user()){
             // 이전에 장바구니가 있는지 확인
-            $check = DB::table('shop_cart')
-                -> where('email', $user->email)
-                ->orderBy('id', "desc")
-                ->first();
+            $check = $this->isDbCart($user);
 
             if ($check){
                 // 카트 번호 저장
@@ -63,6 +60,16 @@ class CartOffcanvas extends Component
             // Subtotal 계산
             $this->calculateSubtotal();
         }
+    }
+
+    private function isDbCart($user)
+    {
+
+
+        return DB::table('shop_cart')
+                -> where('email', $user->email)
+                ->orderBy('id', "desc")
+                ->first();
     }
 
     public function calculateSubtotal()
@@ -126,15 +133,5 @@ class CartOffcanvas extends Component
 
             ]);
         }
-    }
-
-    protected $listeners = [
-        'requestCartItem' => 'getCartItem'
-    ];
-
-    public function getCartItem()
-    {
-        // Dispatch an event back to the first component with the cart item data
-        $this->dispatch('updatedCartItem', $this->cart);
     }
 }
