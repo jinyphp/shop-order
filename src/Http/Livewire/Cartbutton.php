@@ -16,10 +16,10 @@ class CartButton extends Component
 
     public function countCartItems(){
         if ($user = Auth::user()) {
-            // 사용자의 카트 아이템 수 계산
+            // 사용자의 카트 상품 종류 수 계산
             $this->count = DB::table('shop_cart')
                 ->where('email', $user->email)
-                ->sum('quantity');
+                ->count('id');
         }
     }
 
