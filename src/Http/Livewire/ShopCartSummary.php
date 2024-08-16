@@ -39,12 +39,6 @@ class ShopCartSummary extends Component
 
     public function render()
     {
-        // return view($this->viewfile, [
-        //     'subtotal' => $this->subtotal,
-        //     'saving' => $this->saving,
-        //     'tax' => $this->tax,
-        //     'total' => $this->total,
-        // ]);
 
         return view($this->viewfile,[
 
@@ -58,10 +52,12 @@ class ShopCartSummary extends Component
 
     public function updatedCartItem($value)
     {
-        $this->calculateSummary($value);
-        foreach($value as $item) {
-            $this->cartItems []= $item;
-        }
+        // $this->calculateSummary($value);
+        // foreach($value as $item) {
+        //     $this->cartItems []= $item;
+        // }
+        $this->cartItems = $value;
+        $this->calculateSummary($this->cartItems);
     }
 
 
