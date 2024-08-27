@@ -8,34 +8,43 @@ use Webuni\FrontMatter\FrontMatter;
 use Jiny\Pages\Http\Parsedown;
 use \Jiny\Html\CTag;
 use Jiny\Shop\Entities\ShopSliders;
+use Illuminate\Support\Facades\Auth;
 
-//use Livewire\WithFileUploads;
 
 class ShopOrders extends Component
 {
     public $orders = [];
-    public $viewfile;
+    public $viewFile;
 
     public function mount()
     {
         $this->loadOrders();
-        if(!$this->viewfile){
-            $this->viewfile = 'jiny-shop-order::cartzilla.orderlist.order-list';
+        if(!$this->viewFile) {
+            $this->viewFile = 'jiny-shop-order::cartzilla.orderlist.order-list';
         }
+        // if(!$this->viewfile){
+        //     $this->viewfile = 'jiny-shop-order::cartzilla.orderlist.order-list';
+        // }
     }
 
     public function loadOrders()
     {
-        $email = 'aaa'; // 이메일이 'aaa'인 사용자의 위시리스트 불러옴
-        $this->orders = DB::table('shop_orders')
-            ->where('email', $email)
-            ->get();
+        if ($user = Auth::user()) {
+            $email = $user->email;
+
+            $this->orders = DB::table('shop_orders')
+                ->where('email', $email)
+                ->orderBy('id', 'desc')
+                ->get();
+        } else {
+            $this->orders = [];
+        }
     }
 
     public function render()
     {
-        return view($this->viewfile, [
-            'orders'=>$this->orders,
+        return view($this->viewFile, [
+            'orders' => $this->orders,
         ]);
     }
 }

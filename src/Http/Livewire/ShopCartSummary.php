@@ -61,20 +61,28 @@ class ShopCartSummary extends Component
     }
 
 
-    public function cartUpdated($item)
+    public function cartUpdated($item=null)
     {
-        //dd($item);
+        //dd($item
+        if (!$item) {
+            return;
+        };
+
         foreach($this->cartItems as $i => $cart) {
 
             // 동일한 카트를 찾아 갱신
             if($cart['id'] == $item['id']) {
-                $this->cartItems[$i] = $item;
+                // $this->cartItems[$i] = $item;
+                if ($item['quantity'] == 0) {
+                    unset($this->cartItems[$i]); // 수량이 0인 항목은 삭제
+                } else {
+                    $this->cartItems[$i] = $item;
+                }
             }
         }
 
         // 다시 계산
         $this->calculateSummary($this->cartItems);
-        //dd($this->cartItems);
     }
 
 
