@@ -20,7 +20,7 @@ class ShopOrders extends Component
     {
         $this->loadOrders();
         if(!$this->viewFile) {
-            $this->viewFile = 'jiny-shop-order::shop.order.list';
+            $this->viewFile = 'jiny-shop-order::cartzilla.orderlist.order-list';
         }
         // if(!$this->viewfile){
         //     $this->viewfile = 'jiny-shop-order::cartzilla.orderlist.order-list';
