@@ -8,25 +8,33 @@ use Illuminate\Support\Facades\DB;
 
 use Cart;
 use Illuminate\Support\Facades\Auth;
-
-class OrderListController extends Controller
+use Jiny\Site\Http\Controllers\SiteController;
+class OrderListController extends SiteController
 {
 
-    public $admin;
     public function __construct()
     {
-        $this->admin = true;
+        parent::__construct();
+        $this->setVisit($this);
+
+        ## actions 기본설정 동작처리
+        $this->setActions();
     }
-    /**
-     * Display a listing of the resource.
-     * @return Renderable
-     */
+
+    private function setActions()
+    {
+        $actions['title'] = "주문내역";
+        $actions['subtitle'] = "";
+
+        // 레이아웃을 커스텀 변경합니다.
+        $actions['view']['layout'] = "account-orders";
+
+        $this->setReflectActions($actions);
+    }
+
     public function index(Request $request)
     {
-        $viewFile = "www::slot1.shop.orderList";
-        return view($viewFile, [
-            'admin'=>$this->admin,
-        ]);
+        return parent::index($request);
     }
 
 }
